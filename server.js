@@ -12,8 +12,11 @@ app.use(cors());
 
 app.get('/api/weather', async (req, res) => {
 	try {
+		const city = req.query.city || 'London';
 		const response = await fetch(
-			`https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=${apiKey}`
+			`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+				city
+			)}&units=metric&appid=${apiKey}`
 		);
 		const data = await response.json();
 		res.json(data);
