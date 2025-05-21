@@ -1,17 +1,3 @@
-<template>
-	<div>
-		<h2>Weather App</h2>
-		<input v-model="city" placeholder="Enter a city" />
-		<button @click="fetchWeather">Get Weather</button>
-
-		<p v-if="temp !== null">City: {{ currentCity }}</p>
-		<p v-if="temp !== null">Temperature: {{ temp }} °C</p>
-
-		<p v-else-if="loading">Loading...</p>
-		<p v-else-if="error">{{ error }}</p>
-	</div>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 
@@ -50,3 +36,50 @@ const fetchWeather = async () => {
 	}
 };
 </script>
+
+<template>
+	<h1>Weather App</h1>
+	<div class="input-container">
+		<input v-model="city" placeholder="Enter a city" />
+		<button @click="fetchWeather">Find</button>
+	</div>
+	<div class="result-container">
+		<p v-if="temp !== null">Location: {{ currentCity }}</p>
+		<p v-if="temp !== null">Temperature: {{ temp }} °C</p>
+		<p v-else-if="loading">Loading...</p>
+		<p v-else-if="error">{{ error }}</p>
+	</div>
+</template>
+
+<style scoped>
+h1 {
+	text-align: center;
+}
+
+.input-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+}
+
+.input-container input,
+button {
+	padding: 5px;
+	border-radius: 5px;
+	color: black;
+	transition: 0.2s ease;
+}
+
+.input-container button:hover {
+	cursor: pointer;
+	color: green;
+}
+
+.result-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+</style>
